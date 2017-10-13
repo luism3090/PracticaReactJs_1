@@ -1,0 +1,83 @@
+instalar dependencias para hacer funcionar las clases desde react y poder extender las clases para pasar datos entre distintos js
+
+
+primero debemos instalar node js
+podemos instalarlo desde ---->  https://nodejs.org/es/
+
+
+ node js 
+
+una vez instalado primero vamos a inicializar nuestro archivo package.json para guardar y configurar todas nuestras dependencias 
+a utilizar colocamos en siguiente comando
+
+
+npm init 
+
+de ahi se nos creara un arhivo llamado package.json donde nos dará cierta informacion de nuestras dependencias y nos pedirar cierta informacion de configuracion de nuestra app
+
+
+despues debemos instalar las dependencias de manera global para que se guarden en nuestro archivo package.json para esto debemos usar la declaracion --save 
+
+
+//dependencies --save
+
+npm install --save react
+npm install --save react-dom
+npm install --save browserify
+
+
+para saber que es browserify 
+http://www.nazariglez.com/2015/02/19/primeros-pasos-con-browserify/
+http://www.cristalab.com/tutoriales/usa-modulos-del-lado-cliente-con-browserify-c114540l/
+
+
+
+tambien instalaremos otras dependencias para que todo funcione bien las cuales son las sigueintes :
+
+//dev dependencies --save-dev
+
+npm install --save-dev babelify
+npm install --save-dev watchify
+npm install --save-dev babel-preset-es2015
+npm install --save-dev babel-preset-react
+
+
+colocar en el archivo package.json en el objeto scripts los datos siguientes :
+
+// watchify ./app.js -v -t [ babelify --presets [ es2015 react] ] -o ./build.js
+
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "watchify ./app.js -v -t [ babelify --presets [ es2015 react] ] -o ./build.js"
+  },
+
+guardamos 
+
+y solo corremos el comando para que en automatico se convierta de codigo emascript 6 a emascript 5
+
+npm run build
+
+
+
+
+
+
+Nota : 
+
+podemos eliminar la carpeta de Node_modules la cual contiene las dependencias de nuestro proyecto, son importantes claro, pero mientras esten en el archivo package.json el proyecto ya sabra cuales dependencias se debe instalar , asi que de esta manera si queremos subir o pasar el proyecto a otro lugar etc
+podemos eliminar la carpeta Node_modules  y solo pasar los archivos de nuestra aplicacion junto con el package.json y de esta forma con solo colocar el comando 
+
+npm install 
+
+y en automatico se instalaran las dependencias que teniamos instaladas 
+
+
+
+
+
+
+
+
+
+

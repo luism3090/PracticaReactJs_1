@@ -1,0 +1,437 @@
+Lo primero que tenemos que hacer es instalar NodeJs, descargamos e instalamos node js
+
+abrimos la consola de NodeJs
+
+
+
+y tecleamos para verificar que version de Node js tenemos:
+
+node --version
+
+
+
+---------------
+
+
+ahora crearemos el famoso archivo de configuracion de nuestro proyecto llamado package.json el cual nos va a mostrar cuales son nuestras dependencias tanto de produccion como de desarrollo asi como la version especifica, para ello teclearemos el siguiente comando
+
+npm init -y
+npm init -yes
+
+y con esto se nos habrá creado automaticamente el archivo package.js
+
+
+---- NOTA IMPORTANTE:  ------
+
+""" 
+
+Antes de continuar debemos saber lo siguiente :
+
+Node js nos permite usar una herramienta llamada "npm" ("node package module") la cual nos permite instalar modulos nuevos osea ("librerias") asi que para la mayoria de las operaciones deberemos instalar modulos adicionales, del mismo modo que para instalar webpack deberemos usar npm
+
+"""
+
+luego de crear nuestro archivo package.json debemos tener encuenta los detalles siguientes: 
+
+* al usar npm vamos a instalar modulos o librerias las cuales nos van ayudar a trabajar con nuestros proyectos, la instalacion de estos modulos o librerias debe ser configurada en nuestro archivo package.json 
+pero para ello debemos saber 2 cosas sobre la instalacion de estos modulos 
+
+se dice que cuando instalamos un modulo usando npm estamos haciendo referencia a dependencias las cuales son principalmente dependecias (normales) y dependencias de desarrollo
+
+
+----- Dependencias (normales) ---------
+
+Son recursos que van a formar parte de los archivos descargables. Es decir que, cuando alguien instale el módulo, va a descargar también todas esas dependencias.
+
+
+
+un modulo instalado usando e indicador "--save" sera guardado dentro de la lista del archivo package.json sobre el objeto "dependencias"
+
+
+
+------ Dependencias de desarrollo -------
+
+
+Son recursos que se van a usar solo para desarrollar el módulo.
+Es decir que, cuando alguien lo instale, no va a necesitar descargar todas estas dependencias.
+
+Éstas pueden ser herramientas de tests, de documentación, task runners, etc.
+
+
+
+Un módulo instalado con el indicador "--save-dev" se guarda en la lista del archivo package.json. sobre el objeto "devDependencies"
+
+
+
+-------- Otra Nota mas :  ------------
+
+
+jQuery, LoDash, Vue y Axios son generalmente dependencias. Pero, como de costumbre, depende de las herramientas que está utilizando. Por ejemplo, con Webpack, tu estas empacando todo dentro de bundles para usarse. Así que, en realidad, todo lo que va a ser empaquetado es un devDependency
+
+En resumen, un devDependency es todo lo que necesitará para hacer que la página trabaje en producción
+
+
+---------------- instalando dependencias de webpack de forma global y local ----------------
+
+
+Vamos a instalar webpack de forma local y de forma global para tener mayor comodidad a la hora de trabajar
+
+
+Nota : 
+
+para instalar webpack de forma global solo debemos anteponerle el prefijo 
+( "-g" o "-global" ) a lo ultimo de la sentencia
+
+
+----- instalando dependencias de desarrollo "devDependencies" de webpack -----
+
+(para ello usaremos los prefijos "--save-dev"  o "-D" )
+
+
+npm install webpack -g
+npm install --save-dev webpack 
+
+npm install webpack -g 
+npm install -D webpack         
+
+npm install webpack -g
+npm install webpack --save-dev  
+
+
+-- de una version en especifico -- 
+
+npm install webpack@2.2.1 -g
+npm install --save-dev webpack@2.2.1 
+
+npm install webpack@2.2.1 -g
+npm install -D webpack@2.2.1   
+
+npm install webpack@2.2.1 -g
+npm install webpack@2.2.1 --save-dev 
+
+
+----- instalando dependencias (normales) "Dependencies" de webpack -----
+
+ 
+npm install webpack -g
+npm install --save webpack 
+
+npm install webpack -g
+npm install webpack --save  
+
+
+-- de una version en especifico -- 
+
+npm install webpack@2.2.1 -g
+npm install --save webpack@2.2.1 
+
+npm install webpack@2.2.1 -g
+npm install webpack@2.2.1 --save 
+   
+
+
+---------
+
+
+tambien podemos acceder a la version que tenemos instalada de webpack
+
+si esta instalado solo de forma local, se debe usar la ruta de instalacion de webpack  (node_modules\.bin\webpack) 
+
+  	node_modules\.bin\webpack -v 
+
+
+
+si esta instalado de forma global solo basta con usar 
+
+	webpack -v 
+
+
+
+Tambien podemos desinstalar una dependencia con el comando  "uninstall"
+
+npm uninstall webpack -g
+
+npm uninstall --save-dev webpack
+
+npm uninstall --save webpack
+
+
+----------------------------------- ¿ QUE ES WEBPACK ? ----------------------------------
+
+
+webpack es una herramienta de empaquetado de archivos para aplicaciones web que permite generar un archivo unico apartir de un conjunto establecido de assets (archivos que incluimos en nuestro html como scripts,css,librerias etc)
+
+Entre los recursos que es capaz de gestionar webpack, podemos encontrar formatos soportados por defecto como HTML, JavaScript, CSS, así como otros formatos que necesitan ser transformados como SASS, CoffeeScript o Jade.
+
+El problema suele ser que, a medida que las dependencias crecen y el desarrollo se complica, aumenta el número de assets a ser incluidos en el HTML y con ello el número de peticiones que el navegador debe realizar al servidor para cargar la página, haciendo que el rendimiento se vea perjudicado ostensiblemente.
+
+Con webpack definiremos un único pipeline de procesamiento de recursos, obteniendo un único fichero empaquetado y minificado con todos los recursos necesarios para nuestro desarrollo.
+
+
+---------------  crear un empaquetado con webpack -------------------
+
+Para crear un empaquetado de nuestros archivos debemos seguir lo siguiente
+
+Que archivo(s) se van a empaquetar, (entrada) y el archivo final que sera el archivo empaquetado (salida) .
+
+* Si tenemos instalado webpack de forma local debemos colocar la ruta a donde esta instalado webpack que es (node_modules\.bin\webpack) 
+
+
+sintaxis:  node_modules\.bin\webpack input.js dist\output.js   
+
+Ejemplo : 
+
+node_modules\.bin\webpack app.js dist\bundle.js
+
+o
+
+node_modules\.bin\webpack app.js bundle.js
+
+
+* Si tenemos instalado webpack de forma global solo bastara con colocar la palabra 
+webpack 
+
+
+Sintaxis: webpack input.js dist\output.js   
+
+
+Ejemplo : 
+
+webpack app.js dist\bundle.js
+
+o
+
+webpack app.js bundle.js
+
+
+
+
+---------------- Agregando jquery como dependencia de webpack a nuestro proyecto ------------
+
+Para agregar jquery a nuestro proyecto debemos hacer lo siguiente
+
+npm install jquery --save 
+
+Nota: 
+
+podemos agregar cuantas librerias queramos no solo jquery
+
+
+
+----------------- escuchar cambios al guardar un archivo --watch -------------
+
+
+para escuchar los cambios de una mejor manera utilizamos el comando --watch o -w
+
+node_modules\.bin\webpack app.js dist\bundle.js --watch
+
+
+
+
+------------------- instalando recursos en webpack con loader ---------------------------
+
+instalando un loader para correr css
+
+npm install style-loader css-loader -D 
+
+
+
+
+
+------------------------ crear empaquetado con npm run ------------------------------------------
+
+
+vamos a nuestro package.json y dentro del objeto scripts escribimos nuestro comando de empaquetado
+
+"dev": "node_modules/.bin/webpack index.js bundle.js"
+
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node_modules/.bin/webpack index.js bundle.js"
+  },
+
+
+
+----------------------- creando nuestro archivo de configuracion de webpack  -------------------------
+
+Nota:  para este proceso quiza podriamos requerir instalar webpack de forma global y
+para ello debemos hacer lo siguiente 
+
+npm install  -global webpack@2.2.1     // para instalar una version en especifico
+npm install  -global webpack           // para instalar la version mas actual
+
+
+// Desintalar webpack de forma global 
+
+npm uninstall  -global webpack@2.2.1     // para desintalar una version en especifico
+npm uninstall  -global webpack           // para desintalar la version mas actual
+
+
+
+
+Este archivo de configurarsion se debe encontrar en la raiz de nuestro proyecto ,el cual se debe llamar
+
+webpack.config.js
+
+-----
+
+const CONFIG  = 
+				{
+					entry:'./app.js',
+					output: {
+						path: __dirname,
+						filename: 'dist/bundle.js'
+					}
+				}
+
+module.exports = CONFIG;
+
+-----
+
+"SI" tenemos instalado webpack de forma global en nuestro proyecto debemos usar lo siguiente :
+
+y escribir en la terminal simplemente 
+
+webpack 
+
+y si queremos estar escuchando todos los cambios 
+
+webpack --watch
+
+-----
+
+Si "NO" tenemos instalado webpack de forma global, pero si lo tenemos instalado de forma local en nuestro proyecto debemos usar algo parecido a lo siguiente:
+
+
+node_modules\.bin\webpack
+
+//  o para escuchar los cambios en todo momento
+
+node_modules\.bin\webpack --watch
+
+
+
+---------------- instalando el servidor de desarrollo de webpack ----------------------------
+
+
+lo primero que debemos hacer es  instalar el servidor de webpack , para ello escribiremos en la terminal los siguientes comandos:
+
+
+npm install webpack-dev-server -g
+
+despues de instalarlo debemos configurar en nuestro package.json la configuracion siguiente
+
+en la parte de scripts modificar nuestra entrada y salida segun nuestro proyecto
+
+"scripts": {
+    "dev": "webpack-dev-server --entry input.js --output-filename output.js"
+  },
+
+
+depues escribir en nuestra consola lo siguiente 
+
+npm run dev 
+
+y ya estará funcionando nuestro servidor de desarrollo escuchando cambios en tiempo real 
+
+
+
+--------------- usando babel para ejecutar el servidor de webpack ----------------------
+
+
+para usar babel dentro de nuestro proyecto debemos ejecutar los siguientes comandos 
+
+npm install babel-core babel-loader babel-preset-es2015 --save-dev
+npm install babel-core babel-loader babel-preset-es2015 --save
+
+
+Nota : 
+
+babel --> una de sus funciones es transformar de javascript ecmascript 2016 a ecmascript 2015 
+para que sea compatible con todos los navegadores 
+
+
+una vez instalado babel debemos configurar nuestro archvios webpack.config.js para que funcione 
+babel y tambien para que quede mejor configurada la forma en que llamamos a los css 
+para ello debemos colocar el siguiente codigo
+
+
+module:{
+		loaders:[
+			{
+				test:/\.css$/, 
+				loader: 'style-loader!css-loader'
+			},
+			{
+				test:/\.js$/, 
+				loader: 'babel-loader',
+				exclude: /node_modules/,
+				query: { 
+					presets: ['es2015']
+				}
+			},
+		]
+	}
+
+
+y por ultimo solo debemos correr el comando 
+
+npm run dev
+
+
+
+
+
+
+
+
+
+
+
+----------------------- instalacion global : -----------------------
+
+
+Para instalar webpack de forma global haremos uso del comando npm 
+
+npm install  -global webpack@2.2.1     // para instalar una version en especifico
+npm install  -global webpack     // para instalar la version mas actual
+
+o
+
+npm i -g webpack@2.2.1 		// para instalar una version en especifico
+npm i -g webpack            // para instalar la version mas actual
+
+
+Tenga en cuenta que esto no es una práctica recomendada. La instalación global bloquea una versión específica de webpack y puede fallar en proyectos que utilizan una versión diferente.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
